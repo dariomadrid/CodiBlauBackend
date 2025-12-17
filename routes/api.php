@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Health check endpoint
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok',
+        'timestamp' => now()->toIso8601String(),
+        'service' => 'CodiBlau API'
+    ]);
+});
+
 Route::prefix('sessions')->group(function () {
     Route::post('/', [SessionController::class, 'store']); // crear sessió
     Route::get('/list', [SessionController::class, 'index']);
